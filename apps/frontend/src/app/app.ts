@@ -1,11 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { TodosPageComponent } from '@pages/todos-page';
 
 @Component({
   selector: 'app-root',
-  imports: [],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [TodosPageComponent],
+  template: `<app-todos-page />`,
 })
-export class App {
-  protected readonly title = signal('frontend');
-}
+export class App {}

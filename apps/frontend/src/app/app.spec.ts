@@ -1,23 +1,18 @@
-import { TestBed } from '@angular/core/testing';
+import { MockBuilder, MockRender } from 'ng-mocks';
 import { App } from './app';
+import { TodosPageComponent } from '@pages/todos-page';
 
 describe('App', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [App],
-    }).compileComponents();
-  });
+  beforeEach(() => MockBuilder(App).mock(TodosPageComponent));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    const fixture = MockRender(App);
+    expect(fixture.point.componentInstance).toBeTruthy();
   });
 
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+  it('should render todos page', () => {
+    const fixture = MockRender(App);
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, frontend');
+    expect(compiled.querySelector('app-todos-page')).toBeTruthy();
   });
 });

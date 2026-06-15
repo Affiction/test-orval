@@ -5,7 +5,7 @@ export default defineConfig({
     input: 'http://localhost:3000/openapi.json',
     output: {
       mode: 'tags-split',
-      target: 'src/app/api',
+      target: 'src/shared/api',
       client: 'angular',
       baseUrl: 'http://localhost:3000',
     },

@@ -18,3 +18,7 @@ export interface CreateTodo {
   title: string;
 }
 
+export interface UpdateTodo {
+  done: boolean;
+}
+
