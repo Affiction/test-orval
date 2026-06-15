@@ -5,6 +5,6 @@ import { TodosPageComponent } from '@pages/todos-page';
   selector: 'app-root',
   standalone: true,
   imports: [TodosPageComponent],
-  template: `<app-todos-page />`,
+  templateUrl: './app.html',
 })
 export class App {}
