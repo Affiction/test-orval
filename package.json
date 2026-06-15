@@ -4,6 +4,7 @@
   "scripts": {
     "dev:backend": "pnpm --filter backend dev",
     "dev:frontend": "pnpm --filter frontend start",
+    "generate:spec": "pnpm --filter backend generate:spec",
     "codegen": "pnpm --filter frontend codegen"
   }
 }

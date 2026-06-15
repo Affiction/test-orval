@@ -2,7 +2,7 @@ import { defineConfig } from 'orval'
 
 export default defineConfig({
   todos: {
-    input: 'http://localhost:3000/openapi.json',
+    input: '../../docs/openapi.json',
     output: {
       mode: 'tags-split',
       target: 'src/shared/api',
