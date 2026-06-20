@@ -1,4 +1,4 @@
-import { defineConfig } from 'orval'
+import { defineConfig } from 'orval';
 
 export default defineConfig({
   todos: {
@@ -8,6 +8,22 @@ export default defineConfig({
       target: 'src/shared/api',
       client: 'angular',
       baseUrl: 'http://localhost:3000',
+      mock: {
+        generators: [
+          {
+            type: 'msw',
+            useExamples: true,
+            delay: 200,
+          },
+        ],
+      },
+      override: {
+        mock: {
+          useExamples: true,
+          arrayMin: 1,
+          arrayMax: 1,
+        },
+      },
     },
   },
-})
+});
