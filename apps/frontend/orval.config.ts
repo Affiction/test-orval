@@ -8,6 +8,9 @@ export default defineConfig({
       target: 'src/shared/api',
       client: 'angular',
       baseUrl: 'http://localhost:3000',
+      mock: {
+        generators: [{ type: 'msw', useExamples: true }],
+      },
     },
   },
 })

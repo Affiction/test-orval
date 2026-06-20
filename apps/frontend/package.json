@@ -27,12 +27,21 @@
     "@angular/build": "^22.0.1",
     "@angular/cli": "^22.0.1",
     "@angular/compiler-cli": "^22.0.0",
+    "@faker-js/faker": "^9.5.0",
+    "@ngneat/falso": "^7.4.0",
+    "fishery": "^2.3.1",
     "jsdom": "^28.0.0",
+    "msw": "^2.7.0",
     "ng-mocks": "^14.15.3",
     "orval": "^8.17.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.0.8"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
