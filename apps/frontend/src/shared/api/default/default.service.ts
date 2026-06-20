@@ -4,21 +4,40 @@
  * Todo API
  * OpenAPI spec version: 1.0.0
  */
-import { HttpClient, HttpHeaders, HttpResponse as AngularHttpResponse } from '@angular/common/http';
-import type { HttpContext, HttpEvent, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse as AngularHttpResponse
+} from '@angular/common/http';
+import type {
+  HttpContext,
+  HttpEvent,
+  HttpParams
+} from '@angular/common/http';
 
-import { Injectable, inject } from '@angular/core';
+import {
+  Injectable,
+  inject
+} from '@angular/core';
 
-import { Observable } from 'rxjs';
+import {
+  Observable
+} from 'rxjs';
 
-import type { CreateTodo, Todo, UpdateTodo } from '../todoAPI.schemas';
+import type {
+  CreateTodo,
+  Todo,
+  UpdateTodo
+} from '../todoAPI.schemas';
+
+
 
 interface HttpClientOptions {
   readonly headers?: HttpHeaders | Record<string, string | string[]>;
   readonly context?: HttpContext;
   readonly params?:
-    | HttpParams
-    | Record<string, string | number | boolean | Array<string | number | boolean>>;
+        | HttpParams
+      | Record<string, string | number | boolean | Array<string | number | boolean>>;
   readonly reportProgress?: boolean;
   readonly withCredentials?: boolean;
   readonly credentials?: RequestCredentials;
@@ -30,7 +49,7 @@ interface HttpClientOptions {
   readonly referrer?: string;
   readonly integrity?: string;
   readonly referrerPolicy?: ReferrerPolicy;
-  readonly transferCache?: { includeHeaders?: string[] } | boolean;
+  readonly transferCache?: {includeHeaders?: string[]} | boolean;
   readonly timeout?: number;
 }
 
@@ -50,172 +69,174 @@ type HttpClientObserveOptions = HttpClientOptions & {
   readonly observe?: 'body' | 'events' | 'response';
 };
 
+
+
+
+
+
+
 @Injectable({ providedIn: 'root' })
 export class DefaultService {
   private readonly http = inject(HttpClient);
-  getTodos<TData = Todo[]>(options?: HttpClientBodyOptions): Observable<TData>;
-  getTodos<TData = Todo[]>(options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ getTodos<TData = Todo[]>( options?: HttpClientBodyOptions): Observable<TData>;
+ getTodos<TData = Todo[]>( options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ getTodos<TData = Todo[]>( options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
   getTodos<TData = Todo[]>(
-    options?: HttpClientResponseOptions,
-  ): Observable<AngularHttpResponse<TData>>;
-  getTodos<TData = Todo[]>(
-    options?: HttpClientObserveOptions,
-  ): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+     options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
-      return this.http.get<TData>(`http://localhost:3000/todos`, {
+      return this.http.get<TData>(
+      `http://localhost:3000/todos`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
-      });
+      }
+    );
     }
 
     if (options?.observe === 'response') {
-      return this.http.get<TData>(`http://localhost:3000/todos`, {
+      return this.http.get<TData>(
+      `http://localhost:3000/todos`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
-      });
+      }
+    );
     }
 
-    return this.http.get<TData>(`http://localhost:3000/todos`, {
-      ...(options as Omit<NonNullable<typeof options>, 'observe'>),
-      observe: 'body',
-    });
+    return this.http.get<TData>(
+      `http://localhost:3000/todos`,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+      }
+    );
   }
+ postTodos<TData = Todo>(createTodo?: CreateTodo, options?: HttpClientBodyOptions): Observable<TData>;
+ postTodos<TData = Todo>(createTodo?: CreateTodo, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ postTodos<TData = Todo>(createTodo?: CreateTodo, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
   postTodos<TData = Todo>(
-    createTodo?: CreateTodo,
-    options?: HttpClientBodyOptions,
-  ): Observable<TData>;
-  postTodos<TData = Todo>(
-    createTodo?: CreateTodo,
-    options?: HttpClientEventOptions,
-  ): Observable<HttpEvent<TData>>;
-  postTodos<TData = Todo>(
-    createTodo?: CreateTodo,
-    options?: HttpClientResponseOptions,
-  ): Observable<AngularHttpResponse<TData>>;
-  postTodos<TData = Todo>(
-    createTodo?: CreateTodo,
-    options?: HttpClientObserveOptions,
-  ): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    createTodo?: CreateTodo, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
-      return this.http.post<TData>(`http://localhost:3000/todos`, createTodo, {
+      return this.http.post<TData>(
+      `http://localhost:3000/todos`,
+      createTodo,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
-      });
+      }
+    );
     }
 
     if (options?.observe === 'response') {
-      return this.http.post<TData>(`http://localhost:3000/todos`, createTodo, {
+      return this.http.post<TData>(
+      `http://localhost:3000/todos`,
+      createTodo,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
-      });
+      }
+    );
     }
 
-    return this.http.post<TData>(`http://localhost:3000/todos`, createTodo, {
-      ...(options as Omit<NonNullable<typeof options>, 'observe'>),
-      observe: 'body',
-    });
+    return this.http.post<TData>(
+      `http://localhost:3000/todos`,
+      createTodo,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+      }
+    );
   }
-  getTodosId<TData = Todo>(id: string, options?: HttpClientBodyOptions): Observable<TData>;
+ getTodosId<TData = Todo>(id: string, options?: HttpClientBodyOptions): Observable<TData>;
+ getTodosId<TData = Todo>(id: string, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ getTodosId<TData = Todo>(id: string, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
   getTodosId<TData = Todo>(
-    id: string,
-    options?: HttpClientEventOptions,
-  ): Observable<HttpEvent<TData>>;
-  getTodosId<TData = Todo>(
-    id: string,
-    options?: HttpClientResponseOptions,
-  ): Observable<AngularHttpResponse<TData>>;
-  getTodosId<TData = Todo>(
-    id: string,
-    options?: HttpClientObserveOptions,
-  ): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    id: string, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
-      return this.http.get<TData>(`http://localhost:3000/todos/${id}`, {
+      return this.http.get<TData>(
+      `http://localhost:3000/todos/${id}`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
-      });
+      }
+    );
     }
 
     if (options?.observe === 'response') {
-      return this.http.get<TData>(`http://localhost:3000/todos/${id}`, {
+      return this.http.get<TData>(
+      `http://localhost:3000/todos/${id}`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
-      });
+      }
+    );
     }
 
-    return this.http.get<TData>(`http://localhost:3000/todos/${id}`, {
-      ...(options as Omit<NonNullable<typeof options>, 'observe'>),
-      observe: 'body',
-    });
+    return this.http.get<TData>(
+      `http://localhost:3000/todos/${id}`,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+      }
+    );
   }
+ patchTodosId<TData = Todo>(id: string,
+    updateTodo?: UpdateTodo, options?: HttpClientBodyOptions): Observable<TData>;
+ patchTodosId<TData = Todo>(id: string,
+    updateTodo?: UpdateTodo, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ patchTodosId<TData = Todo>(id: string,
+    updateTodo?: UpdateTodo, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
   patchTodosId<TData = Todo>(
     id: string,
-    updateTodo?: UpdateTodo,
-    options?: HttpClientBodyOptions,
-  ): Observable<TData>;
-  patchTodosId<TData = Todo>(
-    id: string,
-    updateTodo?: UpdateTodo,
-    options?: HttpClientEventOptions,
-  ): Observable<HttpEvent<TData>>;
-  patchTodosId<TData = Todo>(
-    id: string,
-    updateTodo?: UpdateTodo,
-    options?: HttpClientResponseOptions,
-  ): Observable<AngularHttpResponse<TData>>;
-  patchTodosId<TData = Todo>(
-    id: string,
-    updateTodo?: UpdateTodo,
-    options?: HttpClientObserveOptions,
-  ): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    updateTodo?: UpdateTodo, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
-      return this.http.patch<TData>(`http://localhost:3000/todos/${id}`, updateTodo, {
+      return this.http.patch<TData>(
+      `http://localhost:3000/todos/${id}`,
+      updateTodo,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
-      });
+      }
+    );
     }
 
     if (options?.observe === 'response') {
-      return this.http.patch<TData>(`http://localhost:3000/todos/${id}`, updateTodo, {
+      return this.http.patch<TData>(
+      `http://localhost:3000/todos/${id}`,
+      updateTodo,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
-      });
+      }
+    );
     }
 
-    return this.http.patch<TData>(`http://localhost:3000/todos/${id}`, updateTodo, {
-      ...(options as Omit<NonNullable<typeof options>, 'observe'>),
-      observe: 'body',
-    });
+    return this.http.patch<TData>(
+      `http://localhost:3000/todos/${id}`,
+      updateTodo,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+      }
+    );
   }
-  deleteTodosId<TData = void>(id: string, options?: HttpClientBodyOptions): Observable<TData>;
+ deleteTodosId<TData = void>(id: string, options?: HttpClientBodyOptions): Observable<TData>;
+ deleteTodosId<TData = void>(id: string, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ deleteTodosId<TData = void>(id: string, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
   deleteTodosId<TData = void>(
-    id: string,
-    options?: HttpClientEventOptions,
-  ): Observable<HttpEvent<TData>>;
-  deleteTodosId<TData = void>(
-    id: string,
-    options?: HttpClientResponseOptions,
-  ): Observable<AngularHttpResponse<TData>>;
-  deleteTodosId<TData = void>(
-    id: string,
-    options?: HttpClientObserveOptions,
-  ): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    id: string, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
-      return this.http.delete<TData>(`http://localhost:3000/todos/${id}`, {
+      return this.http.delete<TData>(
+      `http://localhost:3000/todos/${id}`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
-      });
+      }
+    );
     }
 
     if (options?.observe === 'response') {
-      return this.http.delete<TData>(`http://localhost:3000/todos/${id}`, {
+      return this.http.delete<TData>(
+      `http://localhost:3000/todos/${id}`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
-      });
+      }
+    );
     }
 
-    return this.http.delete<TData>(`http://localhost:3000/todos/${id}`, {
-      ...(options as Omit<NonNullable<typeof options>, 'observe'>),
-      observe: 'body',
-    });
+    return this.http.delete<TData>(
+      `http://localhost:3000/todos/${id}`,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+      }
+    );
   }
-}
+};
+
