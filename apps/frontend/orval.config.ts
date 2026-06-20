@@ -8,6 +8,7 @@ export default defineConfig({
       target: 'src/shared/api',
       client: 'angular',
       baseUrl: 'http://localhost:3000',
+      mock: true,
     },
   },
 })
